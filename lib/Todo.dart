@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:todoapp/model/Todol.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:todoapp/todoItems.dart';
 
 class Todo extends StatefulWidget {
   const Todo({super.key});
@@ -56,15 +55,11 @@ class _TodoState extends State<Todo> {
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                        // for (ToDo todoo in _foundToDo)
-                        // TodoItem(
-                        //     todo: todoo,
-                        //     onTodoChange: _handleTodoChange,
-                        //     onDeleteTodo: _deleteTodo),
                         StreamBuilder(
                             stream: (name != "" && name != null)
-                                ? _todo.where("todoText",
-                                    arrayContainsAny: [name]).snapshots()
+                                ? _todo
+                                    .where("todoText", isEqualTo: name)
+                                    .snapshots()
                                 : _todo.snapshots(),
                             builder: (context,
                                 AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -169,9 +164,11 @@ class _TodoState extends State<Todo> {
                       borderRadius: BorderRadius.circular(20)),
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
+                    cursorColor: Colors.grey,
                     controller: _todoController,
                     decoration: const InputDecoration(
                       hintText: 'Add a new todo item',
+                      border: InputBorder.none,
                     ),
                   ),
                 )),
@@ -225,8 +222,9 @@ class _TodoState extends State<Todo> {
 
   Widget search() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      padding: const EdgeInsets.only(top: 20, bottom: 10),
       child: TextField(
+        cursorColor: Colors.grey,
         onChanged: (value) {
           setState(() {
             name = value;
@@ -234,6 +232,7 @@ class _TodoState extends State<Todo> {
         },
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 1),
             prefixIcon: const Icon(Icons.search),
             prefixIconConstraints:
                 const BoxConstraints(maxHeight: 50, minWidth: 50),
