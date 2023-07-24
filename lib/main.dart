@@ -1,9 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todoapp/Todo/ui/Todo1.dart';
 import 'firebase_options.dart';
 import 'package:todoapp/Signup.dart';
-import 'package:todoapp/Todo.dart';
+import 'package:todoapp/Todo/ui/Todo.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +26,6 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: Todo());
+        home: Todo1());
   }
 }

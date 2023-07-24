@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:todoapp/model/Todol.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../model/Todol.dart';
 
 class Todo extends StatefulWidget {
   const Todo({super.key});
